@@ -26,6 +26,21 @@ const createItem = ({ original, description, preview }) => {
 galleryItems.forEach((item) => createItem(item));
 galleryEl.append(...galleryNodes);
 
+const openImage = (event) => {
+    event.preventDefault();
+
+    const largeImgUrl = event.target.dataset.source;
+    //console.log(largeImgUrl);
+}
+
+galleryItems.forEach((item) => createItem(item));
+galleryEl.append(...galleryNodes);
+
+galleryEl.addEventListener("click", openImage);
+
+
+
+
 // import { galleryItems } from "./gallery-items.js";
 // // Change code below this line
 
