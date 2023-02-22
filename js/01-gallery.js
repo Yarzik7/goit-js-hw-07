@@ -1,5 +1,4 @@
 import { galleryItems } from "./gallery-items.js";
-import * as basicLightbox from "../index.html";
 
 const galleryEl = document.querySelector(".gallery");
 const galleryNodes = [];
@@ -27,9 +26,8 @@ const createItem = ({ original, description, preview }) => {
 const openImage = (event) => {
   event.preventDefault();
 
-  const largeImgUrl = event.target.dataset.source;
-  basicLightbox.create(`<img width="1400" height="900" src="https://placehold.it/1400x900">`).show();
-  //console.log(largeImgUrl);
+  const originalImgUrl = event.target.dataset.source;
+  basicLightbox.create(`<img width="auto" height="auto" src="${originalImgUrl}">`).show();
 };
 
 galleryItems.forEach((item) => createItem(item));
