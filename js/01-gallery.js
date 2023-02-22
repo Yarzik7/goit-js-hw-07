@@ -1,4 +1,5 @@
 import { galleryItems } from "./gallery-items.js";
+import * as basicLightbox from "../index.html";
 
 const galleryEl = document.querySelector(".gallery");
 const galleryNodes = [];
@@ -23,23 +24,18 @@ const createItem = ({ original, description, preview }) => {
   galleryNodes.push(galleryItem);
 };
 
-galleryItems.forEach((item) => createItem(item));
-galleryEl.append(...galleryNodes);
-
 const openImage = (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    const largeImgUrl = event.target.dataset.source;
-    //console.log(largeImgUrl);
-}
+  const largeImgUrl = event.target.dataset.source;
+  basicLightbox.create(`<img width="1400" height="900" src="https://placehold.it/1400x900">`).show();
+  //console.log(largeImgUrl);
+};
 
 galleryItems.forEach((item) => createItem(item));
 galleryEl.append(...galleryNodes);
 
 galleryEl.addEventListener("click", openImage);
-
-
-
 
 // import { galleryItems } from "./gallery-items.js";
 // // Change code below this line
