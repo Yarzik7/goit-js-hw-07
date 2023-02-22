@@ -1,4 +1,4 @@
-import { galleryItems } from './gallery-items.js';
+import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
 const galleryEl = document.querySelector(".gallery");
@@ -26,4 +26,7 @@ const createItem = ({ original, description, preview }) => {
 galleryItems.forEach((item) => createItem(item));
 galleryEl.append(...galleryNodes);
 
-//galleryEl.addEventListener("click", openImage);
+new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionDelay: 250,
+});
