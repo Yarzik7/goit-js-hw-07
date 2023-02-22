@@ -27,7 +27,22 @@ const openImage = (event) => {
   event.preventDefault();
 
   const originalImgUrl = event.target.dataset.source;
-  basicLightbox.create(`<img width="auto" height="auto" src="${originalImgUrl}">`).show();
+
+  const instance = basicLightbox.create(
+    `<img width="auto" height="auto" src="${originalImgUrl}">`,
+    {
+      onShow: () => window.addEventListener("keydown", onCloseWithEscape),
+      onClose: () => window.removeEventListener("keydown", onCloseWithEscape),
+    }
+  );
+
+  const onCloseWithEscape = (event) => {
+    if (event.code === "Escape") {
+      instance.close();
+    }
+  };
+
+  instance.show();
 };
 
 galleryItems.forEach((item) => createItem(item));
