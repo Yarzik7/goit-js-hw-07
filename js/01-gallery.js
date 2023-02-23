@@ -34,16 +34,16 @@ const createItem = ({ original, description, preview }) => {
  * @returns {void}
  */
 const openImage = (event) => {
-  event.preventDefault(); // Скасовує поведінку за замовчуванням
+  event.preventDefault();                                                   // Скасовує поведінку за замовчуванням
 
-  if (event.target.nodeName !== "IMG") return; // Припиняє виконання функції якщо клік був не на елементі <img>
+  if (event.target.nodeName !== "IMG") return;                              // Припиняє виконання функції якщо клік був не на елементі <img>
 
-  const originalImgUrl = event.target.dataset.source; // Отримує посилання на оригінальне зображення за "data-атрибуту"
+  const originalImgUrl = event.target.dataset.source;                       // Отримує посилання на оригінальне зображення з "data-атрибуту"
 
   // Створення об'єкту для рендерингу модального вікна за допомогою бібліотеки basicLightbox
   const instance = basicLightbox.create(`<img src="${originalImgUrl}">`, {
-    onShow: () => window.addEventListener("keydown", onCloseByEsc), // Реєструє обробник події "keydown" якщо показано модальне вікно
-    onClose: () => window.removeEventListener("keydown", onCloseByEsc), // Видаляє відповідний обробник події "keydown" при видаленні модального вікна
+    onShow: () => window.addEventListener("keydown", onCloseByEsc),         // Реєструє обробник події "keydown" якщо показано модальне вікно
+    onClose: () => window.removeEventListener("keydown", onCloseByEsc),     // Видаляє відповідний обробник події "keydown" при видаленні модального вікна
   });
   
 
@@ -54,14 +54,21 @@ const openImage = (event) => {
    */
   const onCloseByEsc = (event) => {
     if (event.code === "Escape") {
-      instance.close(); // Викликає функцію для видалення модального вікна
+      instance.close();                                                     // Викликає функцію для видалення модального вікна
     }
   };
 
-  instance.show(); // Рендерить модальне вікно з оригінальним зображенням
+  instance.show();                                                          // Рендерить модальне вікно з оригінальним зображенням
 };
 
 galleryItems.forEach((item) => createItem(item)); // Перебір даних з об'єкту galleryItems і створення елементу галереї
+
+//////////////////////////////////// Фікс посилання на перше зображення галереї ///////////////////////////////////////////////
+galleryNodes[0].firstChild.href = "https://cdn.pixabay.com/photo/2019/05/14/16/43/flower-4202825_1280.jpg";
+galleryNodes[0].firstChild.firstChild.dataset.source ="https://cdn.pixabay.com/photo/2019/05/14/16/43/flower-4202825_1280.jpg";
+galleryNodes[0].firstChild.firstChild.src = "https://cdn.pixabay.com/photo/2019/05/14/16/43/flower-4202825__340.jpg";
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 galleryEl.append(...galleryNodes); // Додає готові вузли розмітки в контейнер галереї
 
 galleryEl.addEventListener("click", openImage);

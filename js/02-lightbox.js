@@ -29,6 +29,13 @@ const createItem = ({ original, description, preview }) => {
 };
 
 galleryItems.forEach((item) => createItem(item)); // Перебір даних з об'єкту galleryItems і створення елементу галереї
+
+//////////////////////////////////// Фікс посилання на перше зображення галереї ///////////////////////////////////////////////
+galleryNodes[0].firstChild.href = "https://cdn.pixabay.com/photo/2019/05/14/16/43/flower-4202825_1280.jpg";
+galleryNodes[0].firstChild.firstChild.dataset.source ="https://cdn.pixabay.com/photo/2019/05/14/16/43/flower-4202825_1280.jpg";
+galleryNodes[0].firstChild.firstChild.src = "https://cdn.pixabay.com/photo/2019/05/14/16/43/flower-4202825__340.jpg";
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 galleryEl.append(...galleryNodes); // Додає готові вузли розмітки в контейнер галереї
 
 // Створення і рендер модального вікна за допомогою бібліотеки SimpleLightbox
