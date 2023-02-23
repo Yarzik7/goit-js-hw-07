@@ -40,10 +40,12 @@ const openImage = (event) => {
 
   const originalImgUrl = event.target.dataset.source; // Отримує посилання на оригінальне зображення за "data-атрибуту"
 
+  // Створення об'єкту для рендерингу модального вікна за допомогою бібліотеки basicLightbox
   const instance = basicLightbox.create(`<img src="${originalImgUrl}">`, {
-    onShow: () => window.addEventListener("keydown", onCloseByEsc),     // Реєструє обробник події "keydown"
-    onClose: () => window.removeEventListener("keydown", onCloseByEsc), // Видаляє відповідний обробник події "keydown"
+    onShow: () => window.addEventListener("keydown", onCloseByEsc), // Реєструє обробник події "keydown" якщо показано модальне вікно
+    onClose: () => window.removeEventListener("keydown", onCloseByEsc), // Видаляє відповідний обробник події "keydown" при видаленні модального вікна
   });
+  
 
   /**
    * Фунція перевіряє чи була натиснута клавіша "Esc". Якщо так, то викликає функцію для видалення модального вікна
@@ -52,14 +54,14 @@ const openImage = (event) => {
    */
   const onCloseByEsc = (event) => {
     if (event.code === "Escape") {
-      instance.close(); // викликає функцію для видалення модального вікна
+      instance.close(); // Викликає функцію для видалення модального вікна
     }
   };
 
   instance.show(); // Рендерить модальне вікно з оригінальним зображенням
 };
 
-galleryItems.forEach((item) => createItem(item));
+galleryItems.forEach((item) => createItem(item)); // Перебір даних з об'єкту galleryItems і створення елементу галереї
 galleryEl.append(...galleryNodes); // Додає готові вузли розмітки в контейнер галереї
 
 galleryEl.addEventListener("click", openImage);

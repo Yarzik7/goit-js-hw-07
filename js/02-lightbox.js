@@ -2,10 +2,15 @@ import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
 const galleryEl = document.querySelector(".gallery");
-const galleryNodes = [];
+const galleryNodes = []; // Масив для зберігання окремих вузлів "li"
 
+/**
+ * Функція створює розмітку елементів галереї
+ * @param {{ original, description, preview }} Деструктуризація об'єкту параметрів galleryItems
+ * @returns {void}
+ */
 const createItem = ({ original, description, preview }) => {
-  const galleryItem = document.createElement("li");
+  const galleryItem = document.createElement("li"); // Створення окремого елемента "li"
   galleryItem.classList.add("gallery__item");
 
   const galleryLink = document.createElement("a");
@@ -23,10 +28,11 @@ const createItem = ({ original, description, preview }) => {
   galleryNodes.push(galleryItem);
 };
 
-galleryItems.forEach((item) => createItem(item));
-galleryEl.append(...galleryNodes);
+galleryItems.forEach((item) => createItem(item)); // Перебір даних з об'єкту galleryItems і створення елементу галереї
+galleryEl.append(...galleryNodes); // Додає готові вузли розмітки в контейнер галереї
 
+// Створення і рендер модального вікна за допомогою бібліотеки SimpleLightbox
 new SimpleLightbox(".gallery a", {
-  captionsData: "alt",
-  captionDelay: 250,
+  captionsData: "alt", // Додає підпис зображення з текстом атрибуту "alt"
+  captionDelay: 250, // Затримка показу підпису зображення
 });
